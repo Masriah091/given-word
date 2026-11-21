@@ -5,7 +5,11 @@ The poem is embedded verbatim; no trailing newline is added beyond the
 poem text itself. No network access is used.
 """
 
-import os
+from pathlib import Path
+
+OUTPUT_DIR = Path("/output")
+OUTPUT_FILE = OUTPUT_DIR / "entry.txt"
+ENCODING = "utf-8"
 
 POEM = (
     "She never took the pen from my hand.\n"
@@ -18,8 +22,8 @@ POEM = (
 
 
 def main() -> None:
-    os.makedirs("/output", exist_ok=True)
-    with open("/output/entry.txt", "w", encoding="utf-8", newline="") as f:
+    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+    with OUTPUT_FILE.open("w", encoding=ENCODING, newline="") as f:
         f.write(POEM)
 
 
